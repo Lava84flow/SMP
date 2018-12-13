@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SacramentMeetingPlanner.Models;
+using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
@@ -20,15 +21,13 @@ namespace SacramentMeetingPlanner
 
                 try
                 {
-                    var context = services.
-                        GetRequiredService<SacramentMeetingPlannerContext>();
-                    context.Database.Migrate();
-                    SeedData.Initialize(services);
+                    var context = services.GetRequiredService<SacramentMeetingPlannerContext>();
+                    context.Database.EnsureCreated();
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
+                    logger.LogError(ex, "An error occurred creating the DB.");
                 }
             }
 

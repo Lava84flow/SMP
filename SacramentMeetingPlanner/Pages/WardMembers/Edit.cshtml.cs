@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.WardMembers
 {
-    public class EditModel : WardMemberNamePageModel
+    public class EditModel : PageModel
     {
         private readonly SacramentMeetingPlanner.Models.SacramentMeetingPlannerContext _context;
 
@@ -20,7 +20,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
         }
 
         [BindProperty]
-        public Meeting Meeting { get; set; }
+        public WardMember WardMember { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,13 +29,12 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return NotFound();
             }
 
-            Meeting = await _context.Meeting.FirstOrDefaultAsync(m => m.ID == id);
+            WardMember = await _context.WardMember.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Meeting == null)
+            if (WardMember == null)
             {
                 return NotFound();
             }
-            PopulateWardMembersDropDownList(_context, Meeting.Speaker);
             return Page();
         }
 
@@ -46,7 +45,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return Page();
             }
 
-            _context.Attach(Meeting).State = EntityState.Modified;
+            _context.Attach(WardMember).State = EntityState.Modified;
 
             try
             {
@@ -54,7 +53,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MeetingExists(Meeting.ID))
+                if (!WardMemberExists(WardMember.ID))
                 {
                     return NotFound();
                 }
@@ -67,9 +66,9 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             return RedirectToPage("./Index");
         }
 
-        private bool MeetingExists(int id)
+        private bool WardMemberExists(int id)
         {
-            return _context.Meeting.Any(e => e.ID == id);
+            return _context.WardMember.Any(e => e.ID == id);
         }
     }
 }
