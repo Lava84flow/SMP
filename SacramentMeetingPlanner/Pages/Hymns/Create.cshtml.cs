@@ -7,14 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.Hymns
 {
-    public class CreateModel : WardMemberNamePageModel
+    public class CreateModel : PageModel
     {
         private readonly SacramentMeetingPlanner.Models.SacramentMeetingPlannerContext _context;
-
-        [BindProperty]
-        public Meeting Meeting { get; set; }
 
         public CreateModel(SacramentMeetingPlanner.Models.SacramentMeetingPlannerContext context)
         {
@@ -23,10 +20,11 @@ namespace SacramentMeetingPlanner.Pages.Meetings
 
         public IActionResult OnGet()
         {
-            PopulateWardMembersDropDownList(_context);
-            PopulateHymnsDropDownList(_context);
             return Page();
         }
+
+        [BindProperty]
+        public Hymn Hymn { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -35,7 +33,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return Page();
             }
 
-            _context.Meeting.Add(Meeting);
+            _context.Hymn.Add(Hymn);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
