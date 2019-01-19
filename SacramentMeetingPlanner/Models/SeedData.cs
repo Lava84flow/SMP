@@ -48,11 +48,32 @@ namespace SacramentMeetingPlanner.Models
                         OpeningSong = "#426 Don't Hit People",
                         SacramentSong = "#865 People Did Nice Things",
                         ClosingSong = "#567 Undying Love ",
-                        Speaker = "Thing 1",
-                        Subject = "Stuff 1",
+                        Speaker1 = "Thing 1",
+                        Subject1 = "Stuff 1",
+                        Speaker2 = "Thing 47",
+                        Subject2 = "Stuff 47",
+                        Speaker3 = "Thing 12",
+                        Subject3 = "Stuff 12",
+                    },
+
+                    new Meeting
+                    {
+                        MeetingDate = DateTime.Parse("1981-11-15"),
+                        DateUpdated = DateTime.Now,
+                        Bishopric = "Billy Bob",
+                        OpeningPrayer = "Adam Smith",
+                        ClosingPrayer = "Old McDude",
+                        OpeningSong = "#426 Don't Hit People",
+                        SacramentSong = "#865 People Did Nice Things",
+                        ClosingSong = "#567 Undying Love ",
+                        Speaker1 = "Thing 1",
+                        Subject1 = "Stuff 1",
+                        Speaker2 = "Thing 47",
+                        Subject2 = "Stuff 47",
+                        Speaker3 = "Thing 12",
+                        Subject3 = "Stuff 12",
                     }
 
-                    
                 );
                 context.SaveChanges();
             }
