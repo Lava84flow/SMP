@@ -15,10 +15,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Bishopric\" />
-    <Folder Include="Pages\Hymns\" />
-    <Folder Include="Pages\Members\" />
-  </ItemGroup>
-
 </Project>
