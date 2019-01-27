@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using SacramentMeetingPlanner.Models;
 
 namespace SacramentMeetingPlanner.Models
 {
@@ -13,10 +14,10 @@ namespace SacramentMeetingPlanner.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<SacramentMeetingPlannerContext>>()))
             {
-                // Look for any meetings.
+                // Look for any Meetings.
                 if (context.Meeting.Any())
                 {
-                    return;   // DB has been seeded
+                    return;   // Meetings has been seeded
                 }
 
                 context.Meeting.AddRange(
@@ -71,10 +72,463 @@ namespace SacramentMeetingPlanner.Models
                         Speaker2 = "Thing 47",
                         Subject2 = "Stuff 47",
                         Speaker3 = "Thing 12",
-                        Subject3 = "Stuff 12",
+                        Subject3 = "Stuff 12"
                     }
-
                 );
+
+                // Look for any Bishopric.
+                if (context.Bishopric.Any())
+                {
+                    return;   // Bishopric has been seeded
+                }
+
+                var Bishopric = new Bishopric[]
+                    {
+                    //Bishopric
+                    new Bishopric{FirstName="Michael",LastName="Goodrich",Calling="Bishop",},
+                    new Bishopric{FirstName="Fred",LastName="Torgerson",Calling="Bishopric First Counselor",},
+                    new Bishopric{FirstName="Michael",LastName="Kniephof",Calling="Bishopric Second Counselor",},
+                    new Bishopric{FirstName="Andrew",LastName="Neilsen",Calling="Ward Executive Secretary",},
+                    new Bishopric{FirstName="Jared",LastName="Boster",Calling="Ward Clerk",},
+                    new Bishopric{FirstName="Scott",LastName="Taysom",Calling="Ward Assistant Clerk",},
+                    new Bishopric{FirstName="Nolen",LastName="Brown",Calling="Ward Assistant Clerk--Membership",},
+                    new Bishopric{FirstName="Chad",LastName="Hansen",Calling="Ward Assistant Clerk--Finance",},
+                    new Bishopric{FirstName="Aldexander",LastName="Carson",Calling="Ward Assistant Executive Secretary",},
+                    };
+
+                foreach (Bishopric b in Bishopric)
+                {
+                    context.Bishopric.Add(b);
+                }
+                context.SaveChanges();
+
+                // Look for any WardMembers.
+                if (context.WardMember.Any())
+                {
+                    return;   // WardMembers has been seeded
+                }
+
+                var wardMembers = new WardMember[]
+                {
+                    // Relief Society
+                    new WardMember{FirstName="Nicole",LastName="Dobson",Calling="Relief Society President",IsBishopric="No",},
+                    new WardMember{FirstName="Anderson",LastName="Melissa",Calling="Relief Society First Counselor",IsBishopric="No",},
+                    new WardMember{FirstName="Carissa",LastName="Dawn",Calling="Relief Society Second Counselor",IsBishopric="No",},
+                    new WardMember{FirstName="Karina",LastName="Jackson",Calling="Relief Society Secretary",IsBishopric="No",},
+                    new WardMember{FirstName="Ashley",LastName="Langford",Calling="Relief Society Meeting Coordinator",IsBishopric="No",},
+                    new WardMember{FirstName="Carolyn",LastName="Beefelt",Calling="Relief Society Meeting Committee Member",IsBishopric="No",},
+                    new WardMember{FirstName="Gina",LastName="Glover",Calling="Relief Society Compassionate Service Coordinator",IsBishopric="No",},
+                    new WardMember{FirstName="Kelsi",LastName="Meyer",Calling="Relief Society Teacher",IsBishopric="No",},
+                    new WardMember{FirstName="Trisha",LastName="Palmer",Calling="Ward Pianist",IsBishopric="No",},
+                    new WardMember{FirstName="Katie",LastName="Watkins",Calling="Relief Society Teacher",IsBishopric="No",},
+                    new WardMember{FirstName="Micah",LastName="Atkinson",Calling="Relief Society Activities Director",IsBishopric="No",},
+
+                    // Elders Quorum
+                    new WardMember{FirstName="Jacob",LastName="Neilsen",Calling="Elders Quorum President",IsBishopric="No",},
+                    new WardMember{FirstName="Jordan",LastName="Maxwell",Calling="Elders Quorum First Counselor",IsBishopric="No",},
+                    new WardMember{FirstName="Reed",LastName="Perkins",Calling="Elders Quorum Second Counselor",IsBishopric="No",},
+                    new WardMember{FirstName="Jordan",LastName="Mackay",Calling="Elders Quorum Secretary",IsBishopric="No",},
+                    new WardMember{FirstName="Rulon",LastName="Bailey",Calling="Elders Quorum Instructor",IsBishopric="No",},
+                    new WardMember{FirstName="James",LastName="Ebert",Calling="Elders Quorum Activities Director",IsBishopric="No",},
+                    new WardMember{FirstName="Chad",LastName="Hansen",Calling="Sacrament Coordinator",IsBishopric="No",},
+
+                    // Other callings
+                    new WardMember{FirstName="Christina",LastName="Furner",Calling="Sunday School Teacher",IsBishopric="No",},
+                    new WardMember{FirstName="Brie",LastName="LaBaron",Calling="Organist",IsBishopric="No"},
+                    new WardMember{FirstName="Andrea",LastName="Wilson",Calling="Choir Director",IsBishopric="No",}
+                };
+
+                foreach (WardMember w in wardMembers)
+                {
+                    context.WardMember.Add(w);
+                }
+                context.SaveChanges();
+
+                // Look for any Hymns.
+                if (context.Hymn.Any())
+                {
+                    return;   // Hymns has been seeded
+                }
+
+                string[] hymnTitles =
+                {
+                 "The Morning Breaks",
+                "Now Let Us Rejoice",
+                "Truth Eternal",
+                "High on the Mountain Top",
+                "Israel, Israel, God Is Calling",
+                "Come, Sing to the Lord",
+                "What Was Witnessed in the Heavens?",
+                "'Twas Witnessed in the Morning Sky*",
+                "An Angel from on High",
+                "I Saw a Mighty Angel Fly*",
+                "What Glorious Scenes Mine Eyes Behold",
+                "Awake, Ye Saints of God, Awake!",
+                "The Voice of God Again Is Heard",
+                "Come, Listen to a Prophet's Voice",
+                "We Ever Pray for Thee",
+                "God Bless Our Prophet Dear",
+                "Praise to the Man",
+                "A Poor Wayfaring Man of Grief",
+                "Come, Come, Ye Saints",
+                "Our Mountain Home So Dear",
+                "O Ye Mountains High",
+                "For the Strength of the Hills",
+                "Come, All Ye Saints of Zion",
+                "Hail to the Brightness of Zion's Glad Morning!",
+                "Zion Stands with Hills Surrounded",
+                "Lead Me into Life Eternal",
+                "We Will Sing of Zion",
+                "Glorious Things Are Sung of Zion",
+                "We're Not Ashamed to Own Our Lord",
+                "Come, O Thou King of Kings",
+                "Battle Hymn of the Republic",
+                "Raise Your Voices to the Lord",
+                "All Creatures of Our God and King*",
+                "Great King of Heaven",
+                "On This Day of Joy and Gladness",
+                "Come, All Ye Saints Who Dwell on Earth",
+                "Glory to God on High",
+                "A Mighty Fortress Is Our God",
+                "All Glory, Laud, and Honor",
+                "Praise to the Lord, the Almighty",
+                "Praise the Lord with Heart and Voice",
+                "Praise Ye the Lord",
+                "In Hymns of Praise",
+                "Great Is the Lord",
+                "God of Our Fathers, Known of Old",
+                "Press Forward, Saints",
+                "Faith of Our Fathers",
+                "God Is Love",
+                "The Lord Is My Light",
+                "From All That Dwell below the Skies",
+                "Father, Thy Children to Thee Now Raise",
+                "Come, Ye Thankful People",
+                "Dearest Children, God Is Near You",
+                "Lead, Kindly Light",
+                "I Need Thee Every Hour",
+                "Nearer, Dear Savior, to Thee",
+                "Nearer, My God, to Thee",
+                "Guide Me to Thee",
+                "Precious Savior, Dear Redeemer",
+                "Jesus, Savior, Pilot Me",
+                "The Lord Is My Shepherd",
+                "Cast Thy Burden upon the Lord",
+                "Savior, Redeemer of My Soul",
+                "Our Savior's Love",
+                "Lean on My Ample Arm",
+                "I'm a Pilgrim, I'm a Stranger",
+                "Be Still, My Soul*",
+                "How Long, O Lord Most Holy and True",
+                "Be Thou Humble",
+                "More Holiness Give Me",
+                "God Is in His Holy Temple",
+                "Father in Heaven",
+                "My Redeemer Lives",
+                "Bless Our Fast, We Pray",
+                "Jesus, the Very Thought of Thee",
+                "Let the Holy Spirit Guide*",
+                "Secret Prayer",
+                "Prayer Is the Soul's Sincere Desire",
+                "Gently Raise the Sacred Strain",
+                "Sweet Is the Work",
+                "As the Dew from Heaven Distilling",
+                "O Thou Kind and Gracious Father",
+                "Father, This Hour Has Been One of Joy",
+                "We Have Partaken of Thy Love",
+                "Before Thee, Lord, I Bow My Head",
+                "Now the Day Is Over",
+                "Lord, Dismiss Us with Thy Blessing",
+                "Great God, to Thee My Evening Song",
+                "Abide with Me; 'Tis Eventide",
+                "Come, Let Us Sing an Evening Hymn",
+                "As the Shadows Fall",
+                "God, Our Father, Hear Us Pray",
+                "In Humility, Our Savior",
+                "While of These Emblems We Partake",
+                "While of These Emblems We Partake",
+                "'Tis Sweet to Sing the Matchless Love",
+                "'Tis Sweet To Sing the Matchless Love",
+                "O Lord of Hosts",
+                "Again, Our Dear Redeeming Lord",
+                "Father in Heaven, We Do Believe",
+                "Jesus of Nazareth, Savior and King",
+                "We'll Sing All Hail to Jesus' Name",
+                "In Remembrance of Thy Suffering",
+                "God Loved Us, So He Sent His Son",
+                "Thy Will, O Lord, Be Done",
+                "O Thou, Before the World Began",
+                "Behold the Great Redeemer Die",
+                "I Stand All Amazed",
+                "How Great the Wisdom and the Love",
+                "That Easter Morn",
+                "Once in Royal David's City",
+                "Away in a Manger",
+                "O Little Town of Bethlehem",
+                "Hark!The Herald Angels Sing",
+                "With Wondering Awe",
+                "While Shepherds Watched Their Flocks",
+                "Far, Far Away on Judea's Plains",
+                "The First Noel",
+                "We Are Sowing",
+                "Come, Let Us Anew",
+                "We Give Thee But Thine Own",
+                "Lord, I Would Follow Thee",
+                "Have I Done Any Good?",
+                "We Are Marching On to Glory",
+                "Improve the Shining Moments",
+                "Scatter Sunshine",
+                "Let Us Oft Speak Kind Words",
+                "Jesus, Mighty King in Zion",
+                "Do What Is Right",
+                "Come Along, Come Along",
+                "This House We Dedicate to Thee",
+                "Onward, Christian Soldiers",
+                "We Love Thy House, O God",
+                "Up, Awake, Ye Defenders of Zion",
+                "Put Your Shoulder to the Wheel",
+                "True to the Faith",
+                "As Zion's Youth in Latter Days",
+                "O Thou Rock of Our Salvation",
+                "Thy Servants Are Prepared",
+                "How Wondrous and Great",
+                "Jehovah, Lord of Heaven and Earth",
+                "I'll Go Where You Want Me to Go",
+                "Oh Say, What Is Truth?",
+                "Truth Reflects upon Our Senses",
+                "The Iron Rod",
+                "As I Search the Holy Scriptures",
+                "Thy Holy Word",
+                "Welcome, Welcome, Sabbath Morning",
+                "Help Me Teach with Inspiration",
+                "If You Could Hie to Kolob*",
+                "Rise, Ye Saints, and Temples Enter",
+                "Rejoice, Ye Saints of Latter Days",
+                "Turn Your Hearts",
+                "Each Life That Touches Ours for Good",
+                "O Love That Glorifies the Son",
+                "Our Father, by Whose Name",
+                "From Homes of Saints Glad Songs Arise",
+                "Home Can Be a Heaven on Earth",
+                "Keep the Commandments",
+                "Love One Another",
+                "As Sisters in Zion(Women)",
+                "We Meet Again as Sisters (Women)",
+                "Sweet Is the Work(Women)",
+                "Love at Home(Women)",
+                "Ye Elders of Israel(Men)",
+                "The Priesthood of Our Lord(Men)",
+                "Ye Who Are Called to Labor(Men)",
+                "Come, All Ye Sons of God(Men)",
+                "An Angel from on High",
+                "High on the Mountain Top(Men's Choir)",
+                "I Need Thee Every Hour(Men's Choir)",
+                "Brightly Beams Our Father's Mercy (Men's Choir)",
+                "School Thy Feelings(Men's Choir)",
+                "O Home Beloved(Men's Choir)",
+                "America the Beautiful",
+                "My Country, 'Tis of Thee",
+                "The Star - Spangled Banner",
+                "God Save the King"
+            };
+
+            //    int[] hymnNumbers =
+            //    {
+            //    1,
+            //    3,
+            //    4,
+            //    5,
+            //    7,
+            //    10,
+            //    11,
+            //    12,
+            //    13,
+            //    15,
+            //    16,
+            //    17,
+            //    18,
+            //    21,
+            //    23,
+            //    24,
+            //    27,
+            //    29,
+            //    30,
+            //    33,
+            //    34,
+            //    35,
+            //    38,
+            //    42,
+            //    43,
+            //    45,
+            //    47,
+            //    48,
+            //    57,
+            //    59,
+            //    60,
+            //    61,
+            //    62,
+            //    63,
+            //    64,
+            //    65,
+            //    67,
+            //    68,
+            //    69,
+            //    72,
+            //    73,
+            //    74,
+            //    75,
+            //    77,
+            //    80,
+            //    81,
+            //    84,
+            //    87,
+            //    89,
+            //    90,
+            //    91,
+            //    94,
+            //    96,
+            //    97,
+            //    98,
+            //    99,
+            //    100,
+            //    101,
+            //    103,
+            //    104,
+            //    108,
+            //    110,
+            //    112,
+            //    113,
+            //    120,
+            //    121,
+            //    124,
+            //    126,
+            //    130,
+            //    131,
+            //    132,
+            //    133,
+            //    135,
+            //    138,
+            //    141,
+            //    143,
+            //    144,
+            //    145,
+            //    146,
+            //    147,
+            //    149,
+            //    150,
+            //    154,
+            //    155,
+            //    158,
+            //    159,
+            //    163,
+            //    164,
+            //    165,
+            //    167,
+            //    168,
+            //    170,
+            //    172,
+            //    173,
+            //    174,
+            //    176,
+            //    177,
+            //    178,
+            //    179,
+            //    180,
+            //    181,
+            //    182,
+            //    183,
+            //    187,
+            //    188,
+            //    189,
+            //    191,
+            //    193,
+            //    195,
+            //    198,
+            //    205,
+            //    206,
+            //    208,
+            //    209,
+            //    210,
+            //    211,
+            //    212,
+            //    213,
+            //    216,
+            //    217,
+            //    218,
+            //    220,
+            //    223,
+            //    225,
+            //    226,
+            //    230,
+            //    232,
+            //    234,
+            //    237,
+            //    244,
+            //    245,
+            //    246,
+            //    247,
+            //    248,
+            //    252,
+            //    254,
+            //    256,
+            //    258,
+            //    261,
+            //    267,
+            //    269,
+            //    270,
+            //    272,
+            //    273,
+            //    274,
+            //    277,
+            //    279,
+            //    280,
+            //    281,
+            //    284,
+            //    287,
+            //    290,
+            //    291,
+            //    293,
+            //    295,
+            //    296,
+            //    297,
+            //    298,
+            //    303,
+            //    308,
+            //    309,
+            //    311,
+            //    317,
+            //    318,
+            //    319,
+            //    320,
+            //    321,
+            //    322,
+            //    328,
+            //    333,
+            //    334,
+            //    335,
+            //    336,
+            //    337,
+            //    338,
+            //    339,
+            //    340,
+            //    341
+            //};
+
+                var Hymns = new Hymn[hymnTitles.Length];
+
+                for (int i = 0; i < Hymns.Length; i++)
+                {
+                    Hymn hymn = new Hymn();
+                    hymn.Title = hymnTitles[i];
+                    hymn.Number = i;
+                    Hymns[i] = hymn;
+                }
+
+                foreach (Hymn h in Hymns)
+                {
+                    context.Hymn.Add(h);
+                }
+
                 context.SaveChanges();
             }
         }

@@ -8,7 +8,7 @@ namespace SacramentMeetingPlanner.Models
 {
     public class WardMember
     {
-        public int WardMemberID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Za-z]+$", ErrorMessage = "Please Enter a name with only alphabet characters")]
@@ -26,6 +26,6 @@ namespace SacramentMeetingPlanner.Models
         public string Calling { get; set; }
 
         [Display(Name = "Bishopric Member?")]
-        public string IsBishopricMember { get; set; }
+        public string IsBishopric { get; set; }
     }
 }

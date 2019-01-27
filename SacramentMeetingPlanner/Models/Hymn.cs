@@ -8,7 +8,7 @@ namespace SacramentMeetingPlanner.Models
 {
     public class Hymn
     {
-        public int HymnID { get; set; }
+        public int ID { get; set; }
 
         [RegularExpression(@"^[0-9A-Za-z\s\-]+$")]
         [Required]
